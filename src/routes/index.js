@@ -1,18 +1,16 @@
 // We only need to import the modules necessary for initial render
-import Home from './Home'
 import PegboardContainer from './Pegboard';
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
-  path: '/',
-  indexRoute: Home,
-  childRoutes: [
-    PegboardContainer(store)
-  ]
 
-})
+export const createRoutes = (store) => {
+  return {
+    path: '/',
+    indexRoute: PegboardContainer(store)
+  }
+};
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:

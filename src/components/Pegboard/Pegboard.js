@@ -103,62 +103,38 @@ class Pegboard extends React.Component {
     const yScale= this.getYScale();
     const xScale = this.getXScale();
 
-    return connectDropTarget(<div style={ { position: 'relative' } }>
-      {
-        Range(0, xTicks + 1).map(xNum => (
-          Range(0, yTicks + 1).map(yNum => (
-            pegboard.getIn([xNum, yNum]) ?
-              (<Peg
-                onPegGrab={ onPegGrab }
-                peg={ pegboard.getIn([xNum, yNum]) }
-                placed={ true }
-                currentPos={ { x: xNum, y: yNum } }
-                style={ {
-                position: 'absolute',
-                top: `${yScale(yNum) - margins.top + 48}px`,
-                left: `${xScale(xNum) + margins.left - 24}px` }
-              } />) :
-              null
+    return connectDropTarget(
+      <g transform={ `translate(${margins.left},${margins.top})`}>
+        {
+          // immutable ranges are inclusive at the start
+          // exclusive at the end
+          Range(0, xTicks + 1).map(xNum => (
+            Range(0, yTicks + 1).map(yNum => (
+              <circle
+                opacity="1"
+                r={ this.pegRadius(xNum, yNum) }
+                cx={ xScale(xNum) }
+                cy={ yScale(yNum) }
+                fill={ this.pegColor(xNum, yNum) }
+              />
+            ))
           ))
-        ))
-      }
-        <svg width={ xSize + margins.left + margins.right }
-          height={ ySize + margins.top + margins.bottom }
-          className={ finalClassName } >
-          <g transform={ `translate(${margins.left},${margins.top})`}>
-            {
-              // immutable ranges are inclusive at the start
-              // exclusive at the end
-              Range(0, xTicks + 1).map(xNum => (
-                Range(0, yTicks + 1).map(yNum => (
-                  !pegboard.getIn([xNum, yNum]) ?
-                    <circle
-                      opacity="1"
-                      r={ this.pegRadius(xNum, yNum) }
-                      cx={ xScale(xNum) }
-                      cy={ yScale(yNum) }
-                      fill={ this.pegColor(xNum, yNum) }
-                      /> : null
-                ))
-              ))
-            }
-          <Axis
-            orientation="bottom"
-            scale={ xScale }
-            transform={ `translate(0, ${ySize})` }
-            tickSizeInner={ ySize }
-            ticks={ xTicks }
-          />
-          <Axis
-            orientation="left"
-            scale={ yScale }
-            transform={ `translate(0, 0)` }
-            tickSizeInner={ xSize }
-            ticks={ yTicks }
-          />
-        </g>
-      </svg>
-    </div>
+        }
+        <Axis
+          orientation="bottom"
+          scale={ xScale }
+          transform={ `translate(0, ${ySize})` }
+          tickSizeInner={ ySize }
+          ticks={ xTicks }
+        />
+        <Axis
+          orientation="left"
+          scale={ yScale }
+          transform={ `translate(0, 0)` }
+          tickSizeInner={ xSize }
+          ticks={ yTicks }
+        />
+      </g>
     );
   }
 }

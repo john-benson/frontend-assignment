@@ -75,18 +75,7 @@ class PegboardContainer extends React.Component {
     const margins = { top: 50, left: 50, right: 20, bottom: 20 };
 
     return (
-      <div className={ classes.gameContainer }>
-        <Sidebar className={ classes.sideBar }>
-          {
-            this.getPegsLeft()
-              .map((peg) => <Peg onPegGrab={ removePeg } peg={ peg } key={ peg.get('id') } />)
-          }
-        </Sidebar>
-        <SnapDragLayer
-          margins={ margins }
-          xScale={ xScale }
-          yScale={ yScale }
-        />
+      <svg className={ classes.svg }>
         <Pegboard
           margins={ margins }
           onPegDrop={ placePeg }
@@ -96,11 +85,7 @@ class PegboardContainer extends React.Component {
           xScale={ xScale }
           yScale={ yScale }
         />
-      <div>
-        <button onClick={ this.onCheck }>Check Results</button>
-        <button onClick={ this.onReset }>Reset</button>
-      </div>
-    </div>
+    </svg>
   );
   }
 
