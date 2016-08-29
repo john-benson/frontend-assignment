@@ -1,0 +1,47 @@
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .contentArea {
+  }
+
+  button {
+    width: 150px;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+  }
+}
+
+.gameArea {
+  display: flex;
+  flex-direction: row;
+}
+
+.correct, .wrong {
+  font-size: 3em;
+  text-align: center;
+}
+
+.correct {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}

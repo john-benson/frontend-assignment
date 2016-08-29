@@ -1,0 +1,44 @@
+.cantDrag {
+  opacity: 0.3;
+}
+
+.pegInfo {
+  width: 55px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.peg {
+  transition: transform 0.4s;
+  background: transparent;
+  margin-bottom: 5px;
+  position: relative;
+  text-align: center;
+
+  .pegId {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    left: 10px;
+    top: 6px;
+  }
+
+  i {
+    position: relative;
+    text-align: center;
+  }
+
+  &.dropped {
+    border: none;
+    margin: 0;
+  }
+
+  &.dragging {
+    transform: rotate(-25deg) translateY(-10px);
+    opacity: 0.5;
+    margin: 0;
+  }
+}
